@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "The Rebirth Tree",
+	id: "fff-tree",
+	author: "FrenchFryFan",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -13,14 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.0",
-	name: "Literally nothing",
+	num: "0.1",
+	name: "Boring Update",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
-	<h3>v0.0</h3><br>
-		- Added things.<br>
-		- Added stuff.`
+	<h3>v0.1</h3><br>
+		- Release. Sort of.<br>`
 
 let winText = `Congratulations! You have reached the end and beaten this game, but for now...`
 
@@ -41,8 +40,13 @@ function canGenPoints(){
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
+	
 	let gain = new Decimal(1)
+	if (hasUpgrade('r', 11)) gain = gain.times(2)
+	if (hasUpgrade('r', 13)) gain = gain.times(upgradeEffect('r', 13))
+	if (hasUpgrade('r', 14)) gain = gain.times(1.5)
+	if (hasUpgrade('a', 11)) gain = gain.times(upgradeEffect('a', 11))
+	if (hasUpgrade('a', 12)) gain = gain.times(2)
 	return gain
 }
 
